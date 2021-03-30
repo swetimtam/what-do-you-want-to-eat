@@ -10,6 +10,7 @@ class App extends React.Component {
     this.state = {
       businesses: [],
       final: [],
+      finalOffset: 0,
       isReady: false,
     };
 
@@ -17,7 +18,9 @@ class App extends React.Component {
     this.addToFinal = this.addToFinal.bind(this);
     this.checkFinal = this.checkFinal.bind(this);
     this.toggleIsReady = this.toggleIsReady.bind(this);
-    this.pickFinalist = this.pickFinalist.bind(this);
+    this.pickChoice = this.pickChoice.bind(this);
+    this.cutRestaurant = this.cutRestaurant.bind(this);
+    this.checkEndRound = this.checkEndRound.bind(this);
   }
 
   componentDidMount() {
@@ -61,21 +64,44 @@ class App extends React.Component {
     }));
   }
 
-  pickFinalist(index) {
+  pickChoice(index) {
+    this.setState((prevState) => ({
+      finalOffset: prevState.finalOffset + 1,
+    }), () => {
+      this.cutRestaurant(index);
+    });
+  }
+
+  cutRestaurant(index) {
+    const { final, finalOffset } = this.state;
+
     this.setState((prevState) => ({
       final: prevState.final.filter((restaurant, i) => i !== index),
-    }));
+    }), () => {
+      this.checkEndRound();
+    });
+  }
+
+  checkEndRound() {
+    const { final, finalOffset } = this.state;
+
+    if (final.length === finalOffset) {
+      this.setState({
+        finalOffset: 0,
+      })
+    }
   }
 
   render() {
-    const { final, isReady } = this.state;
+    const { final, finalOffset, isReady } = this.state;
 
     if (isReady) {
       return (
         <div>
           <Tournament
             final={final}
-            pickFinalist={this.pickFinalist}
+            finalOffset={finalOffset}
+            pickChoice={this.pickChoice}
           />
         </div>
       )
