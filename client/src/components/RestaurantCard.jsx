@@ -5,8 +5,7 @@ class RestaurantCard extends React.Component {
     super(props);
 
     this.state = {
-      offset: 1,
-      saved: [],
+      offset: 0,
     };
 
     this.getNextRestaurant = this.getNextRestaurant.bind(this);
@@ -19,10 +18,13 @@ class RestaurantCard extends React.Component {
   }
 
   addRestaurant(restaurant) {
+    const { final, addToFinal, toggleIsReady } = this.props;
+
     this.setState((prevState) => ({
       offset: prevState.offset + 1,
-      saved: prevState.saved.concat(restaurant),
-    }));
+    }), () => {
+      addToFinal(restaurant);
+    });
   }
 
   render() {
@@ -32,6 +34,7 @@ class RestaurantCard extends React.Component {
     return (
       <div>
         {businesses[offset] && businesses[offset].name}
+        <br />
         <button
           onClick={this.getNextRestaurant}
         >
@@ -40,6 +43,7 @@ class RestaurantCard extends React.Component {
         <button
           onClick={() => {
             this.addRestaurant(businesses[offset]);
+
           }}
         >
           ADD

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
+import Tournament from './Tournament'
 import RestaurantCard from './RestaurantCard';
 
 class App extends React.Component {
@@ -8,9 +9,15 @@ class App extends React.Component {
     super(props);
     this.state = {
       businesses: [],
+      final: [],
+      isReady: false,
     };
 
     this.getYelpData = this.getYelpData.bind(this);
+    this.addToFinal = this.addToFinal.bind(this);
+    this.checkFinal = this.checkFinal.bind(this);
+    this.toggleIsReady = this.toggleIsReady.bind(this);
+    this.pickFinalist = this.pickFinalist.bind(this);
   }
 
   componentDidMount() {
@@ -30,14 +37,60 @@ class App extends React.Component {
       });
   }
 
+  addToFinal(restaurant) {
+    const { final } = this.state;
+
+    this.setState((prevState) => ({
+      final: [...prevState.final, restaurant],
+    }), () => {
+      this.checkFinal();
+    });
+  }
+
+  checkFinal() {
+    const { final } = this.state;
+
+    if (final.length === 8) {
+      this.toggleIsReady();
+    }
+  }
+
+  toggleIsReady() {
+    this.setState((prevState) => ({
+      isReady: !prevState.isReady,
+    }));
+  }
+
+  pickFinalist(index) {
+    this.setState((prevState) => ({
+      final: prevState.final.filter((restaurant, i) => i !== index),
+    }));
+  }
+
   render() {
-    return (
-      <div>
-        <RestaurantCard
-          businesses={this.state.businesses}
-        />
-      </div>
-    )
+    const { final, isReady } = this.state;
+
+    if (isReady) {
+      return (
+        <div>
+          <Tournament
+            final={final}
+            pickFinalist={this.pickFinalist}
+          />
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <RestaurantCard
+            businesses={this.state.businesses}
+            final={final}
+            addToFinal={this.addToFinal}
+            toggleIsReady={this.toggleIsReady}
+          />
+        </div>
+      )
+    }
   }
 }
 

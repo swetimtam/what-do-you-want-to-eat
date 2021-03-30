@@ -16,6 +16,7 @@ const getBusinesses = () => {
       limit: 50
     }
   }
+
   return axios(options);
 };
 
