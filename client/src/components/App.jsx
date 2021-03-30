@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import RestaurantCard from './RestaurantCard';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +32,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>React is connected</div>
+      <div>
+        <RestaurantCard
+          businesses={this.state.businesses}
+        />
+      </div>
     )
   }
 }

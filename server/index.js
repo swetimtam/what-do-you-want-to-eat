@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.get('/businesses/search', (req, res) => {
   yelp.getBusinesses()
     .then((results) => {
-      res.status(201).send(results.data);
+      res.status(201).send(results.data.businesses);
     })
     .catch((error) => {
       res.status(501).send(error);
