@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Tournament from './Tournament'
 import RestaurantCard from './RestaurantCard';
+import Card from './Card';
 
 class App extends React.Component {
   constructor(props) {
@@ -111,7 +112,10 @@ class App extends React.Component {
     if (isComplete) {
       return (
         <div>
-          It's been decided! You will eat at: {final[finalOffset].name}
+          WINNER WINNER
+          <Card
+            restaurant={final[finalOffset]}
+          />
         </div>
       )
     }

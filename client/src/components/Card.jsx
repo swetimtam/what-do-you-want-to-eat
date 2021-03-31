@@ -5,7 +5,11 @@ const Card = ({ restaurant }) => (
     <p>Name: { restaurant.name }</p>
     <p>Price: { restaurant.price }</p>
     <p>Rating: { restaurant.rating }</p>
-    <img url={ restaurant.image_url }></img>
+    <div
+      className="card-img"
+      style={{ backgroundImage: `url(${restaurant.image_url})` }}
+    >
+    </div>
   </div>
 )
 

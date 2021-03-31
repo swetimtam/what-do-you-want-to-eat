@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from './Card';
 
 class Tournament extends React.Component {
   constructor(props) {
@@ -12,26 +13,34 @@ class Tournament extends React.Component {
   render() {
     const { final, finalOffset, pickChoice } = this.props;
 
-    return (
-      <div>
-        { final[finalOffset] && final[finalOffset].name}
-        <button
-          onClick={() => {
-            pickChoice(finalOffset + 1);
-          }}
-        >
-          SELECT
-        </button>
-        { final[finalOffset + 1] && final[finalOffset + 1].name}
-        <button
-          onClick={() => {
-            pickChoice(finalOffset);
-          }}
-        >
-          SELECT
-        </button>
-      </div>
-    )
+    if (final[finalOffset + 1]) {
+      return (
+        <div>
+          <Card
+            restaurant={final[finalOffset]}
+          />
+          <button
+            onClick={() => {
+              pickChoice(finalOffset + 1);
+            }}
+          >
+            SELECT
+          </button>
+          <Card
+            restaurant={final[finalOffset + 1]}
+          />
+          <button
+            onClick={() => {
+              pickChoice(finalOffset);
+            }}
+          >
+            SELECT
+          </button>
+        </div>
+      )
+    } else {
+      return null;
+    }
   }
 }
 
