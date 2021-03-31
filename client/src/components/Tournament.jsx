@@ -15,27 +15,31 @@ class Tournament extends React.Component {
 
     if (final[finalOffset + 1]) {
       return (
-        <div>
-          <Card
-            restaurant={final[finalOffset]}
-          />
-          <button
-            onClick={() => {
-              pickChoice(finalOffset + 1);
-            }}
-          >
-            SELECT
+        <div className="tournament">
+          <div>
+            <Card
+              restaurant={final[finalOffset]}
+            />
+            <button
+              onClick={() => {
+                pickChoice(finalOffset + 1);
+              }}
+            >
+              CHOOSE
           </button>
-          <Card
-            restaurant={final[finalOffset + 1]}
-          />
-          <button
-            onClick={() => {
-              pickChoice(finalOffset);
-            }}
-          >
-            SELECT
-          </button>
+          </div>
+          <div>
+            <Card
+              restaurant={final[finalOffset + 1]}
+            />
+            <button
+              onClick={() => {
+                pickChoice(finalOffset);
+              }}
+            >
+              CHOOSE
+            </button>
+          </div>
         </div>
       )
     } else {

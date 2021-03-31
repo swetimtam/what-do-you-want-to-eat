@@ -3,3 +3,17 @@
   width: 200px;
   background-size: cover;
 }
+
+.tournament {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}
+
+#root {
+  display: grid;
+  width: 900px;
+  margin: auto;
+  justify-self: center;
+  justify-items: center;
+}
