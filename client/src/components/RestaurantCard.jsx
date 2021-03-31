@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from './Card';
 
 class RestaurantCard extends React.Component {
   constructor(props) {
@@ -31,25 +32,33 @@ class RestaurantCard extends React.Component {
     const { businesses } = this.props;
     const { offset } = this.state;
 
-    return (
-      <div>
-        {businesses[offset] && businesses[offset].name}
-        <br />
-        <button
-          onClick={this.getNextRestaurant}
-        >
-        PASS
-        </button>
-        <button
-          onClick={() => {
-            this.addRestaurant(businesses[offset]);
+    if (businesses[offset]) {
+      return (
+        <div>
+          <Card
+            restaurant={businesses[offset]}
+          />
+          <button
+            onClick={this.getNextRestaurant}
+          >
+            PASS
+          </button>
+          <button
+            onClick={() => {
+              this.addRestaurant(businesses[offset]);
 
-          }}
-        >
-          ADD
-        </button>
-      </div>
-    )
+            }}
+          >
+            ADD
+          </button>
+        </div>
+      )
+    } else {
+      return (
+        <div>loading...</div>
+      )
+    }
+
   }
 }
 

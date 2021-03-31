@@ -12,6 +12,7 @@ class App extends React.Component {
       final: [],
       finalOffset: 0,
       isReady: false,
+      isComplete: false,
     };
 
     this.getYelpData = this.getYelpData.bind(this);
@@ -59,9 +60,9 @@ class App extends React.Component {
   }
 
   toggleIsReady() {
-    this.setState((prevState) => ({
-      isReady: !prevState.isReady,
-    }));
+    this.setState({
+      isReady: true,
+    });
   }
 
   pickChoice(index) {
@@ -88,14 +89,33 @@ class App extends React.Component {
     if (final.length === finalOffset) {
       this.setState({
         finalOffset: 0,
+      }, () => {
+        this.checkFinalistFound();
+      })
+    }
+  }
+
+  checkFinalistFound() {
+    const { final, finalOffset } = this.state;
+
+    if (final.length === 1) {
+      this.setState({
+        isComplete: true,
       })
     }
   }
 
   render() {
-    const { final, finalOffset, isReady } = this.state;
+    const { final, finalOffset, isReady, isComplete } = this.state;
 
-    if (isReady) {
+    if (isComplete) {
+      return (
+        <div>
+          It's been decided! You will eat at: {final[finalOffset].name}
+        </div>
+      )
+    }
+    else if (isReady) {
       return (
         <div>
           <Tournament
