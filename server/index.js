@@ -8,7 +8,9 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/businesses/search', (req, res) => {
-  yelp.getBusinesses()
+  const { longitude, latitude } = req.query;
+
+  yelp.getBusinesses(longitude, latitude)
     .then((results) => {
       res.status(201).send(results.data.businesses);
     })

@@ -26,11 +26,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getYelpData();
+    if ("geolocation" in navigator) {
+      console.log("Available");
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.getYelpData(position.coords);
+      });
+    } else {
+      console.log("Not Available");
+    }
   }
 
-  getYelpData() {
-    axios('/businesses/search')
+  getYelpData(position) {
+    const { longitude, latitude } = position;
+    axios('/businesses/search', { params: { longitude, latitude } })
       .then((results) => {
         console.log(results.data);
         this.setState({
