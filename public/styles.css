@@ -1,7 +1,12 @@
 .card-img {
-  height: 200px;
-  width: 200px;
+  height: 300px;
+  width: 300px;
   background-size: cover;
+}
+
+.card {
+  word-wrap: break-word;
+  width: 300px;
 }
 
 .tournament {
@@ -12,7 +17,7 @@
 
 #root {
   display: grid;
-  width: 900px;
+  width: 600px;
   margin: auto;
   justify-self: center;
   justify-items: center;
