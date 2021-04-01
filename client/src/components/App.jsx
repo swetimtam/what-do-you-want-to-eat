@@ -19,6 +19,10 @@ class App extends React.Component {
       hasLocation: false,
       doneWaiting: false,
       round: 1,
+      longitude: 0,
+      latitude: 0,
+      location,
+      yelpOffset: 0,
     };
 
     this.getYelpData = this.getYelpData.bind(this);
@@ -31,6 +35,7 @@ class App extends React.Component {
     this.submitSearch = this.submitSearch.bind(this);
     this.getNextRestaurant = this.getNextRestaurant.bind(this);
     this.addRestaurant = this.addRestaurant.bind(this);
+    this.checkOffset = this.checkOffset.bind(this);
   }
 
   componentDidMount() {
@@ -39,6 +44,8 @@ class App extends React.Component {
         this.setState({
           hasLocation: true,
           doneWaiting: true,
+          longitude: position.coords.longitude,
+          latitude: position.coords.latitude,
         }, () => {
           this.getYelpData(position.coords);
         })
@@ -55,9 +62,10 @@ class App extends React.Component {
     }
   }
 
-  getYelpData(position) {
-    const { longitude, latitude } = position;
-    axios('/businesses/search', { params: { longitude, latitude } })
+  getYelpData() {
+    const { longitude, latitude, location, yelpOffset } = this.state;
+
+    axios('/businesses/search', { params: { longitude, latitude, location, yelpOffset } })
       .then((results) => {
         console.log(results.data);
         this.setState({
@@ -143,6 +151,7 @@ class App extends React.Component {
         this.setState({
           businesses: results.data.businesses,
           hasLocation: true,
+          location,
         })
       })
       .catch((error) => {
@@ -153,7 +162,9 @@ class App extends React.Component {
   getNextRestaurant() {
     this.setState((prevState) => ({
       offset: prevState.offset + 1,
-    }));
+    }), () => {
+      this.checkOffset();
+    });
   }
 
   addRestaurant(restaurant) {
@@ -162,6 +173,20 @@ class App extends React.Component {
     }), () => {
       this.addToFinalists(restaurant);
     });
+  }
+
+  checkOffset() {
+    const { offset } = this.state;
+
+    if (offset === 50) {
+      this.setState((prevState) => ({
+        offset: 0,
+        yelpOffset: prevState.yelpOffset + 50,
+        businesses: [],
+      }), () => {
+        this.getYelpData();
+      });
+    }
   }
 
   render() {

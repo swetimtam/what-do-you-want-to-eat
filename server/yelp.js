@@ -3,7 +3,7 @@ const config = require('../config');
 
 const baseURL = 'https://api.yelp.com/v3';
 
-const getBusinesses = (longitude, latitude, location) => {
+const getBusinesses = (longitude, latitude, location, offset) => {
   const options = {
     url: `${baseURL}/businesses/search`,
     headers: {
@@ -16,7 +16,7 @@ const getBusinesses = (longitude, latitude, location) => {
       open_now: true,
       radius: 4000,
       limit: 50,
-      offset: 0,
+      offset,
       term: 'food',
     }
   }
