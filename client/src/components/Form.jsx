@@ -23,8 +23,7 @@ class Form extends React.Component {
 
     return (
       <div>
-        <h1>What do you want to eat?</h1>
-        <h3>Fill out the fields below and search for hot local restaurants near you!</h3>
+        <h1>Search for hot local restaurants near you!</h1>
         <input
           onChange={this.handleChange}
           name="location"

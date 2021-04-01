@@ -11,6 +11,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       businesses: [],
+      offset: 0,
       finalists: [],
       finalOffset: 0,
       tourniReady: false,
@@ -28,6 +29,8 @@ class App extends React.Component {
     this.cutRestaurant = this.cutRestaurant.bind(this);
     this.checkEndRound = this.checkEndRound.bind(this);
     this.submitSearch = this.submitSearch.bind(this);
+    this.getNextRestaurant = this.getNextRestaurant.bind(this);
+    this.addRestaurant = this.addRestaurant.bind(this);
   }
 
   componentDidMount() {
@@ -147,13 +150,27 @@ class App extends React.Component {
       });
   }
 
+  getNextRestaurant() {
+    this.setState((prevState) => ({
+      offset: prevState.offset + 1,
+    }));
+  }
+
+  addRestaurant(restaurant) {
+    this.setState((prevState) => ({
+      offset: prevState.offset + 1,
+    }), () => {
+      this.addToFinalists(restaurant);
+    });
+  }
+
   render() {
-    const { finalists, finalOffset, tourniReady, isComplete, hasLocation, doneWaiting, round } = this.state;
+    const { businesses, offset, finalists, finalOffset, tourniReady, isComplete, hasLocation, doneWaiting, round } = this.state;
 
     if (isComplete) {
       return (
         <div>
-          <h1>WINNER WINNER</h1>
+          <h1>WINNER WINNER!!</h1>
           <Card
             restaurant={finalists[finalOffset]}
           />
@@ -172,9 +189,12 @@ class App extends React.Component {
     } else if (hasLocation) {
       return (
         <Tinder
-          businesses={this.state.businesses}
+          businesses={businesses}
+          offset={offset}
           finalists={finalists}
           addToFinalists={this.addToFinalists}
+          getNextRestaurant={this.getNextRestaurant}
+          addRestaurant={this.addRestaurant}
         />
       )
     } else if (doneWaiting) {
