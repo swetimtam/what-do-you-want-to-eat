@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import Tournament from './Tournament'
-import RestaurantCard from './RestaurantCard';
+import Tinder from './Tinder';
 import Card from './Card';
 import Form from './Form';
 
@@ -11,17 +11,19 @@ class App extends React.Component {
     super(props);
     this.state = {
       businesses: [],
-      final: [],
+      finalists: [],
       finalOffset: 0,
-      isReady: false,
+      tourniReady: false,
       isComplete: false,
       hasLocation: false,
+      doneWaiting: false,
+      round: 1,
     };
 
     this.getYelpData = this.getYelpData.bind(this);
-    this.addToFinal = this.addToFinal.bind(this);
-    this.checkFinal = this.checkFinal.bind(this);
-    this.toggleIsReady = this.toggleIsReady.bind(this);
+    this.addToFinalists = this.addToFinalists.bind(this);
+    this.checkTourniStatus = this.checkTourniStatus.bind(this);
+    this.toggleTourniStatus = this.toggleTourniStatus.bind(this);
     this.pickChoice = this.pickChoice.bind(this);
     this.cutRestaurant = this.cutRestaurant.bind(this);
     this.checkEndRound = this.checkEndRound.bind(this);
@@ -31,13 +33,22 @@ class App extends React.Component {
   componentDidMount() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log('hello');
-        this.getYelpData(position.coords);
+        this.setState({
+          hasLocation: true,
+          doneWaiting: true,
+        }, () => {
+          this.getYelpData(position.coords);
+        })
       }, (error) => {
-        console.log(error);
+        this.setState({
+          doneWaiting: true,
+        });
       });
     } else {
       console.log("Geolocation Not Available");
+      this.setState({
+        doneWaiting: true,
+      });
     }
   }
 
@@ -55,27 +66,27 @@ class App extends React.Component {
       });
   }
 
-  addToFinal(restaurant) {
-    const { final } = this.state;
+  addToFinalists(restaurant) {
+    const { finalists } = this.state;
 
     this.setState((prevState) => ({
-      final: [...prevState.final, restaurant],
+      finalists: [...prevState.finalists, restaurant],
     }), () => {
-      this.checkFinal();
+      this.checkTourniStatus();
     });
   }
 
-  checkFinal() {
-    const { final } = this.state;
+  checkTourniStatus() {
+    const { finalists } = this.state;
 
-    if (final.length === 8) {
-      this.toggleIsReady();
+    if (finalists.length === 8) {
+      this.toggleTourniStatus();
     }
   }
 
-  toggleIsReady() {
+  toggleTourniStatus() {
     this.setState({
-      isReady: true,
+      tourniReady: true,
     });
   }
 
@@ -88,31 +99,32 @@ class App extends React.Component {
   }
 
   cutRestaurant(index) {
-    const { final, finalOffset } = this.state;
+    const { finalists, finalOffset } = this.state;
 
     this.setState((prevState) => ({
-      final: prevState.final.filter((restaurant, i) => i !== index),
+      finalists: prevState.finalists.filter((restaurant, i) => i !== index),
     }), () => {
       this.checkEndRound();
     });
   }
 
   checkEndRound() {
-    const { final, finalOffset } = this.state;
+    const { finalists, finalOffset } = this.state;
 
-    if (final.length === finalOffset) {
-      this.setState({
+    if (finalists.length === finalOffset) {
+      this.setState((prevState) => ({
         finalOffset: 0,
-      }, () => {
+        round: prevState.round + 1,
+      }), () => {
         this.checkFinalistFound();
       })
     }
   }
 
   checkFinalistFound() {
-    const { final, finalOffset } = this.state;
+    const { finalists, finalOffset } = this.state;
 
-    if (final.length === 1) {
+    if (finalists.length === 1) {
       this.setState({
         isComplete: true,
       })
@@ -136,44 +148,44 @@ class App extends React.Component {
   }
 
   render() {
-    const { final, finalOffset, isReady, isComplete, hasLocation } = this.state;
+    const { finalists, finalOffset, tourniReady, isComplete, hasLocation, doneWaiting, round } = this.state;
 
     if (isComplete) {
       return (
         <div>
           <h1>WINNER WINNER</h1>
           <Card
-            restaurant={final[finalOffset]}
+            restaurant={finalists[finalOffset]}
           />
         </div>
       )
     }
-    else if (isReady) {
+    else if (tourniReady) {
       return (
-        <div>
-          <Tournament
-            final={final}
-            finalOffset={finalOffset}
-            pickChoice={this.pickChoice}
-          />
-        </div>
+        <Tournament
+          finalists={finalists}
+          finalOffset={finalOffset}
+          pickChoice={this.pickChoice}
+          round={round}
+        />
       )
     } else if (hasLocation) {
       return (
-        <div>
-          <RestaurantCard
-            businesses={this.state.businesses}
-            final={final}
-            addToFinal={this.addToFinal}
-            toggleIsReady={this.toggleIsReady}
-          />
-        </div>
+        <Tinder
+          businesses={this.state.businesses}
+          finalists={finalists}
+          addToFinalists={this.addToFinalists}
+        />
+      )
+    } else if (doneWaiting) {
+      return (
+        <Form
+          submitSearch={this.submitSearch}
+        />
       )
     } else {
       return (
-        <Form
-           submitSearch={this.submitSearch}
-        />
+        <h1>Fetching location...</h1>
       )
     }
   }

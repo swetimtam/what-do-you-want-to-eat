@@ -11,16 +11,16 @@ class Tournament extends React.Component {
   }
 
   render() {
-    const { final, finalOffset, pickChoice } = this.props;
+    const { finalists, finalOffset, pickChoice, round } = this.props;
 
-    if (final[finalOffset + 1]) {
+    if (finalists[finalOffset + 1]) {
       return (
         <div>
-          <h1>CHOOSE BETWEEN</h1>
+          <h1>Tournament: Round {round}</h1>
           <div className="tournament">
             <div>
               <Card
-                restaurant={final[finalOffset]}
+                restaurant={finalists[finalOffset]}
               />
               <button
                 onClick={() => {
@@ -32,7 +32,7 @@ class Tournament extends React.Component {
             </div>
             <div>
               <Card
-                restaurant={final[finalOffset + 1]}
+                restaurant={finalists[finalOffset + 1]}
               />
               <button
                 onClick={() => {

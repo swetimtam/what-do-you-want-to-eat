@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './Card';
 
-class RestaurantCard extends React.Component {
+class Tinder extends React.Component {
   constructor(props) {
     super(props);
 
@@ -19,22 +19,23 @@ class RestaurantCard extends React.Component {
   }
 
   addRestaurant(restaurant) {
-    const { final, addToFinal, toggleIsReady } = this.props;
+    const { addToFinalists } = this.props;
 
     this.setState((prevState) => ({
       offset: prevState.offset + 1,
     }), () => {
-      addToFinal(restaurant);
+      addToFinalists(restaurant);
     });
   }
 
   render() {
-    const { businesses } = this.props;
+    const { businesses, finalists } = this.props;
     const { offset } = this.state;
 
     if (businesses[offset]) {
       return (
         <div>
+          <h1>Tinder Phase: { 8 - finalists.length } more</h1>
           <Card
             restaurant={businesses[offset]}
           />
@@ -55,11 +56,11 @@ class RestaurantCard extends React.Component {
       )
     } else {
       return (
-        <div>loading...</div>
+        <h1>Fetching restaurants...</h1>
       )
     }
 
   }
 }
 
-export default RestaurantCard;
+export default Tinder;
