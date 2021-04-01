@@ -13,10 +13,10 @@ const Card = ({ restaurant }) => {
         className="card-img"
         style={{ backgroundImage: `url(${restaurant.image_url})` }}
       />
-      <p>Category: { categories.join(', ') }</p>
+      <p> {restaurant.price} {categories.join(', ') }</p>
       <p>Name: { restaurant.name }</p>
       <p>Rating: { restaurant.rating }</p>
-      <p>Price: { restaurant.price }</p>
+      <p>Ready for { restaurant.transactions.join(', ') || 'dine-in only' }</p>
       <p>Distance: { (restaurant.distance / 1609).toFixed(1) + 'mi' }</p>
     </div>
   )

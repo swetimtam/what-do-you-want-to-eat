@@ -4,6 +4,7 @@ import axios from 'axios';
 import Tournament from './Tournament'
 import RestaurantCard from './RestaurantCard';
 import Card from './Card';
+import Form from './Form';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class App extends React.Component {
       finalOffset: 0,
       isReady: false,
       isComplete: false,
+      hasLocation: false,
     };
 
     this.getYelpData = this.getYelpData.bind(this);
@@ -23,16 +25,19 @@ class App extends React.Component {
     this.pickChoice = this.pickChoice.bind(this);
     this.cutRestaurant = this.cutRestaurant.bind(this);
     this.checkEndRound = this.checkEndRound.bind(this);
+    this.submitSearch = this.submitSearch.bind(this);
   }
 
   componentDidMount() {
-    if ("geolocation" in navigator) {
-      console.log("Available");
+    if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
+        console.log('hello');
         this.getYelpData(position.coords);
+      }, (error) => {
+        console.log(error);
       });
     } else {
-      console.log("Not Available");
+      console.log("Geolocation Not Available");
     }
   }
 
@@ -42,7 +47,7 @@ class App extends React.Component {
       .then((results) => {
         console.log(results.data);
         this.setState({
-          businesses: results.data,
+          businesses: results.data.businesses,
         })
       })
       .catch((error) => {
@@ -114,13 +119,29 @@ class App extends React.Component {
     }
   }
 
+  submitSearch(location) {
+    console.log(location);
+
+    axios('/businesses/search', { params: { location } })
+      .then((results) => {
+        console.log(results.data);
+        this.setState({
+          businesses: results.data.businesses,
+          hasLocation: true,
+        })
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   render() {
-    const { final, finalOffset, isReady, isComplete } = this.state;
+    const { final, finalOffset, isReady, isComplete, hasLocation } = this.state;
 
     if (isComplete) {
       return (
         <div>
-          WINNER WINNER
+          <h1>WINNER WINNER</h1>
           <Card
             restaurant={final[finalOffset]}
           />
@@ -137,7 +158,7 @@ class App extends React.Component {
           />
         </div>
       )
-    } else {
+    } else if (hasLocation) {
       return (
         <div>
           <RestaurantCard
@@ -147,6 +168,12 @@ class App extends React.Component {
             toggleIsReady={this.toggleIsReady}
           />
         </div>
+      )
+    } else {
+      return (
+        <Form
+           submitSearch={this.submitSearch}
+        />
       )
     }
   }

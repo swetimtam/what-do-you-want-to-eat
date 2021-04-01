@@ -49,7 +49,7 @@ class RestaurantCard extends React.Component {
 
             }}
           >
-            ADD
+            LIKE
           </button>
         </div>
       )

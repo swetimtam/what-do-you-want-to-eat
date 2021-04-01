@@ -8,11 +8,11 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/businesses/search', (req, res) => {
-  const { longitude, latitude } = req.query;
+  const { longitude, latitude, location } = req.query;
 
-  yelp.getBusinesses(longitude, latitude)
+  yelp.getBusinesses(longitude, latitude, location)
     .then((results) => {
-      res.status(201).send(results.data.businesses);
+      res.status(201).send(results.data);
     })
     .catch((error) => {
       res.status(501).send(error);
