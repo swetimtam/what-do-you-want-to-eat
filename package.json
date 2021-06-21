@@ -5,9 +5,9 @@
   "description": "Decide what to eat using nearby restaurants in an elimination style tournament",
   "main": "index.js",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "nodemon server/index.js",
+    "start-dev": "nodemon server/index.js",
+    "build-dev": "webpack -w",
+    "start": "node server/index.js",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
