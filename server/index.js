@@ -19,4 +19,5 @@ app.get('/businesses/search', (req, res) => {
     })
 })
 
+// changed for heroku
 app.listen(process.env.PORT || 3000);
