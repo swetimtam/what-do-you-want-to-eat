@@ -10,7 +10,6 @@ const getBusinesses = (longitude, latitude, location, offset) => {
       Authorization: config.API_KEY,
     },
     params: {
-      location,
       longitude,
       latitude,
       open_now: true,
