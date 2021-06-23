@@ -64,7 +64,7 @@ class App extends React.Component {
 
   getYelpData() {
     const { longitude, latitude, location, yelpOffset } = this.state;
-    debugger;
+    console.log(location);
 
     axios('/businesses/search', { params: { longitude, latitude, location, yelpOffset } })
       .then((results) => {
