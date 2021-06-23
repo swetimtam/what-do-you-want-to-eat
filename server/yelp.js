@@ -4,7 +4,7 @@ const config = require('../config');
 const baseURL = 'https://api.yelp.com/v3';
 
 const getBusinesses = (longitude, latitude, location, offset) => {
-  let location = longitude ? null : location;
+  location = longitude ? null : location;
 
   const options = {
     url: `${baseURL}/businesses/search`,
