@@ -5,6 +5,7 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
   if (businesses[offset]) {
     return (
       <div>
+        <h1>These hot local restaurants want you to eat them out!</h1>
         <h1>Tinder Phase: {8 - finalists.length} more</h1>
         <Card
           restaurant={businesses[offset]}
