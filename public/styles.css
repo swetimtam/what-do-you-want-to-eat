@@ -1,17 +1,17 @@
-#root {
+/* #root {
   display: grid;
   width: 600px;
   margin: auto;
   justify-self: center;
   justify-items: center;
   text-align: center;
-}
+} */
 
-.tinder {
+/* .tinder {
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
-}
+} */
 
 .tournament {
   display: grid;
@@ -22,7 +22,6 @@
 .card {
   word-wrap: break-word;
   width: 300px;
-  border: 1px solid black;
   text-align: left;
   padding: 10px;
 }
