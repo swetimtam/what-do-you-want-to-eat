@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card';
+import Button from 'react-bootstrap/Button';
 
 const Tournament = ({ finalists, finalOffset, pickChoice, round }) => {
   if (finalists[finalOffset + 1]) {
@@ -12,6 +13,7 @@ const Tournament = ({ finalists, finalOffset, pickChoice, round }) => {
               restaurant={finalists[finalOffset]}
             />
             <button
+              className="btn"
               onClick={() => {
                 pickChoice(finalOffset + 1);
               }}

@@ -1,8 +1,22 @@
-.card-img {
-  height: 300px;
-  width: 300px;
-  background-size: cover;
-  background-position: center;
+#root {
+  display: grid;
+  width: 600px;
+  margin: auto;
+  justify-self: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.tinder {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.tournament {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
 }
 
 .card {
@@ -13,19 +27,11 @@
   padding: 10px;
 }
 
-.tournament {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: center;
-}
-
-#root {
-  display: grid;
-  width: 600px;
-  margin: auto;
-  justify-self: center;
-  justify-items: center;
-  text-align: center;
+.card-img {
+  height: 300px;
+  width: 300px;
+  background-size: cover;
+  background-position: center;
 }
 
 @media only screen and (max-width: 700px) {
