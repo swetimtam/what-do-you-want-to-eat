@@ -38,7 +38,7 @@ const Tournament = ({ finalists, finalOffset, pickChoice, round }) => {
               <Card.Body>
                 <Card.Title>{business1.name}</Card.Title>
                 <Card.Subtitle>
-                  {`★${business1.rating} · ${business1.price} · ${(business1.distance / 1609).toFixed(1) + 'mi'}`}
+                  {`${business1.rating}★ · ${business1.price} · ${(business1.distance / 1609).toFixed(1) + 'mi'}`}
                 </Card.Subtitle>
                 <Card.Text>
                   {categories1.join(', ')}
@@ -71,7 +71,7 @@ const Tournament = ({ finalists, finalOffset, pickChoice, round }) => {
               <Card.Body>
                 <Card.Title>{business2.name}</Card.Title>
                 <Card.Subtitle>
-                  {`★${business2.rating} · ${business2.price} · ${(business2.distance / 1609).toFixed(1) + 'mi'}`}
+                  {`${business2.rating}★ · ${business2.price} · ${(business2.distance / 1609).toFixed(1) + 'mi'}`}
                 </Card.Subtitle>
                 <Card.Text>
                   {categories2.join(', ')}

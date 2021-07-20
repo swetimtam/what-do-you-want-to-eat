@@ -31,7 +31,7 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
           <Card.Body>
             <Card.Title>{business.name}</Card.Title>
             <Card.Subtitle>
-              {`★${business.rating} · ${business.price} · ${(business.distance / 1609).toFixed(1) + 'mi'}`}
+              {`${business.rating}★ · ${business.price} · ${(business.distance / 1609).toFixed(1) + 'mi'}`}
             </Card.Subtitle>
             <Card.Text>
               {categories.join(', ')}
