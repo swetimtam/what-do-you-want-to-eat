@@ -35,8 +35,7 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
             </Card.Subtitle>
             <Card.Text>
               {categories.join(', ')}
-            </Card.Text>
-            <Card.Text>
+              <br />
               {`${business.review_count} reviews`}
             </Card.Text>
             <Button

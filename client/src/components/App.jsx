@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import Card from 'react-bootstrap/Card';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Tournament from './Tournament'
 import Tinder from './Tinder';
-import Card from './Card';
+import Cardy from './Card';
 import Form from './Form';
 
 class App extends React.Component {
@@ -194,12 +196,42 @@ class App extends React.Component {
     const { businesses, offset, finalists, finalOffset, tourniReady, isComplete, hasLocation, doneWaiting, round } = this.state;
 
     if (isComplete) {
+      const business = finalists[finalOffset];
+      const categories = [];
+
+      for (let i = 0; i < business.categories.length; i++) {
+        categories.push(business.categories[i].title);
+      }
+
       return (
         <div>
           <h1>WINNER WINNER!!</h1>
-          <Card
-            restaurant={finalists[finalOffset]}
-          />
+          <Card style={{ width: '400px' }}>
+            <Card.Img
+              variant="top"
+              src={business.image_url}
+              alt="Card image"
+              style={{
+                height: '400px',
+                objectFit: 'cover',
+              }}
+            />
+            <Card.Body>
+              <Card.Title>{business.name}</Card.Title>
+              <Card.Subtitle>
+                {`★${business.rating} · ${business.price} · ${(business.distance / 1609).toFixed(1) + 'mi'}`}
+              </Card.Subtitle>
+              <Card.Text>
+                {categories.join(', ')}
+                <br />
+                {`${business.location.address1}, ${business.location.city}, ${business.location.state} ${business.location.zip_code}`}
+                <br />
+                {business.phone}
+                <br />
+                {`${business.review_count} reviews`}
+              </Card.Text>
+            </Card.Body>
+          </Card>
         </div>
       )
     }
