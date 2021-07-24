@@ -1,4 +1,7 @@
 import React from 'react';
+import Alert from 'react-bootstrap/Alert';
+// import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 class Form extends React.Component {
   constructor(props) {
@@ -23,20 +26,30 @@ class Form extends React.Component {
 
     return (
       <div>
-        <h1>Search for hot local restaurants near you!</h1>
+        <Alert variant="warning">
+          Search for hot local restaurants near you!
+        </Alert>
+        {/* <Form>
+          <Form.Group>
+            <Form.Label>
+              Address or Zip Code
+            </Form.Label>
+            <Form.Control />
+          </Form.Group>
+        </Form> */}
         <input
           onChange={this.handleChange}
           name="location"
-          value={location}
           placeholder="Enter location"
         />
-        <button
+        <Button
+          variant="primary"
           onClick={() => {
             submitSearch(location);
           }}
         >
           Search
-        </button>
+        </Button>
       </div>
     )
   }

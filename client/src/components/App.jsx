@@ -1,12 +1,15 @@
 import React from 'react';
 import axios from 'axios';
+import Alert from 'react-bootstrap/Alert';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Tournament from './Tournament'
 import Tinder from './Tinder';
 import Cardy from './Card';
-import Form from './Form';
+import Formy from './Form';
 
 class App extends React.Component {
   constructor(props) {
@@ -23,7 +26,7 @@ class App extends React.Component {
       round: 1,
       longitude: 0,
       latitude: 0,
-      location,
+      location: "",
       yelpOffset: 0,
     };
 
@@ -38,6 +41,7 @@ class App extends React.Component {
     this.getNextRestaurant = this.getNextRestaurant.bind(this);
     this.addRestaurant = this.addRestaurant.bind(this);
     this.checkOffset = this.checkOffset.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -66,7 +70,7 @@ class App extends React.Component {
 
   getYelpData() {
     const { longitude, latitude, location, yelpOffset } = this.state;
-    console.log(location);
+    console.log("Searching using this location: " + location);
 
     axios('/businesses/search', { params: { longitude, latitude, location, yelpOffset } })
       .then((results) => {
@@ -192,8 +196,14 @@ class App extends React.Component {
     }
   }
 
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
+
   render() {
-    const { businesses, offset, finalists, finalOffset, tourniReady, isComplete, hasLocation, doneWaiting, round } = this.state;
+    const { businesses, offset, finalists, finalOffset, tourniReady, isComplete, hasLocation, doneWaiting, location, round } = this.state;
 
     if (isComplete) {
       const business = finalists[finalOffset];
@@ -205,7 +215,9 @@ class App extends React.Component {
 
       return (
         <div>
-          <h1>WINNER WINNER!!</h1>
+          <Alert variant="success">
+            <strong>WINNER WINNER THIS IS YOUR DINNER</strong>
+          </Alert>
           <Card style={{ width: '400px' }}>
             <Card.Img
               variant="top"
@@ -257,13 +269,40 @@ class App extends React.Component {
       )
     } else if (doneWaiting) {
       return (
-        <Form
-          submitSearch={this.submitSearch}
-        />
+        <>
+          <Alert variant="info">
+            Search for hot local restaurants near you!
+          </Alert>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Control
+                type="text"
+                placeholder="Address or Zip Code"
+                // controlId={location}
+                name="location"
+                value={location}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Button
+              variant="primary"
+              onClick={() => {
+                this.submitSearch(location);
+                this.setState({
+                  hasLocation: true,
+                })
+              }}
+            >
+              Search
+            </Button>
+          </Form>
+        </>
       )
     } else {
       return (
-        <h1>Fetching location...</h1>
+        <Alert variant="warning">
+          Stalking your location...
+        </Alert>
       )
     }
   }

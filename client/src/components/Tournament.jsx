@@ -2,6 +2,7 @@ import React from 'react';
 import Cardy from './Card';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Tournament = ({ finalists, finalOffset, pickChoice, round }) => {
@@ -22,7 +23,9 @@ const Tournament = ({ finalists, finalOffset, pickChoice, round }) => {
 
     return (
       <div>
-        <h1>Tournament: Round {round}</h1>
+        <Alert variant="info">
+          Tournament Phase: <strong>Round {round}/3</strong>
+        </Alert>
         <div className="tournament">
           <div>
             <Card>

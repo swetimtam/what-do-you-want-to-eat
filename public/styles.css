@@ -1,17 +1,18 @@
-/* #root {
+#root {
   display: grid;
   width: 600px;
   margin: auto;
   justify-self: center;
   justify-items: center;
   text-align: center;
-} */
+  grid-template-columns: 1fr;
+}
 
-/* .tinder {
+.tinder {
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
-} */
+}
 
 .tournament {
   display: grid;

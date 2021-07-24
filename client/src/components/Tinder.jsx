@@ -2,6 +2,7 @@ import React from 'react';
 import Cardy from './Card';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestaurant }) => {
@@ -16,8 +17,9 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
 
     return (
       <>
-        <h1>These hot local restaurants want you to eat them out!</h1>
-        <h1>Tinder Phase: {8 - finalists.length} more</h1>
+        <Alert variant="info">
+          Tinder Phase: Like <strong>{8 - finalists.length}</strong> more options
+        </Alert>
         <Card style={{ width: '400px' }}>
           <Card.Img
             variant="top"
@@ -59,7 +61,9 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
     )
   } else {
     return (
-      <h1>Fetching restaurants...</h1>
+      <Alert variant="danger">
+        Finding hot local restaurants near you...
+      </Alert>
     )
   }
 }
