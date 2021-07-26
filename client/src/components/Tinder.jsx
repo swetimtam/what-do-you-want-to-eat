@@ -20,43 +20,45 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
         <Alert variant="info">
           Tinder Phase: Like <strong>{8 - finalists.length}</strong> more options
         </Alert>
-        <Card style={{ width: '400px' }}>
-          <Card.Img
-            variant="top"
-            src={business.image_url}
-            alt="Card image"
-            style={{
-              height: '400px',
-              objectFit: 'cover',
-            }}
-          />
-          <Card.Body>
-            <Card.Title>{business.name}</Card.Title>
-            <Card.Subtitle>
-              {`${business.rating}★ · ${business.price} · ${(business.distance / 1609).toFixed(1) + 'mi'}`}
-            </Card.Subtitle>
-            <Card.Text>
-              {categories.join(', ')}
-              <br />
-              {`${business.review_count} reviews`}
-            </Card.Text>
-            <Button
-              variant="outline-danger"
-              onClick={getNextRestaurant}
-            >
-              PASS
-            </Button>
-            {' '}
-            <Button
-              variant="outline-success"
-              onClick={() => {
-                addRestaurant(businesses[offset]);
+        <div className="tinder">
+          <Card style={{ width: '400px' }}>
+            <Card.Img
+              variant="top"
+              src={business.image_url}
+              alt="Card image"
+              style={{
+                height: '400px',
+                objectFit: 'cover',
               }}
-            >
-              LIKE
-            </Button>
-          </Card.Body>
-        </Card>
+            />
+            <Card.Body>
+              <Card.Title>{business.name}</Card.Title>
+              <Card.Subtitle>
+                {`${business.rating}★ · ${business.price} · ${(business.distance / 1609).toFixed(1) + 'mi'}`}
+              </Card.Subtitle>
+              <Card.Text>
+                {categories.join(', ')}
+                <br />
+                {`${business.review_count} reviews`}
+              </Card.Text>
+              <Button
+                variant="outline-danger"
+                onClick={getNextRestaurant}
+              >
+                PASS
+              </Button>
+              {' '}
+              <Button
+                variant="outline-success"
+                onClick={() => {
+                  addRestaurant(businesses[offset]);
+                }}
+              >
+                LIKE
+              </Button>
+            </Card.Body>
+          </Card>
+        </div>
       </>
     )
   } else {
