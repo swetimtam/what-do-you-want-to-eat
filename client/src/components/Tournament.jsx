@@ -22,11 +22,11 @@ const Tournament = ({ finalists, finalOffset, pickChoice, round }) => {
     }
 
     return (
-      <div>
+      <div className="tournament">
         <Alert variant="info">
           Tournament Phase: <strong>Round {round}/3</strong>
         </Alert>
-        <div className="tournament">
+        <div className="tournament-card">
           <Card style={{ width: '100%' }}>
             <Card.Img
               variant="top"

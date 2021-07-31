@@ -9,15 +9,27 @@
 }
 
 .tinder {
+  width: 100%;
+}
+
+.tinder-card {
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
 }
 
 .tournament {
+  width: 100%;
+}
+
+.tournament-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
+}
+
+.alert {
+  width: 100%;
 }
 
 /* .card {

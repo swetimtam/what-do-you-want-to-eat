@@ -16,11 +16,11 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
     }
 
     return (
-      <>
+      <div className="tinder">
         <Alert variant="info">
           Tinder Phase: Like <strong>{8 - finalists.length}</strong> more options
         </Alert>
-        <div className="tinder">
+        <div className="tinder-card">
           <Card style={{ width: '400px' }}>
             <Card.Img
               variant="top"
@@ -59,7 +59,7 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
             </Card.Body>
           </Card>
         </div>
-      </>
+      </div>
     )
   } else {
     return (
