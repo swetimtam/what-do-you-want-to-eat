@@ -224,7 +224,7 @@ class App extends React.Component {
               src={business.image_url}
               alt="Card image"
               style={{
-                height: '400px',
+                height: '300px',
                 objectFit: 'cover',
               }}
             />
@@ -278,7 +278,6 @@ class App extends React.Component {
               <Form.Control
                 type="text"
                 placeholder="Address or Zip Code"
-                // controlId={location}
                 name="location"
                 value={location}
                 onChange={this.handleChange}

@@ -27,72 +27,68 @@ const Tournament = ({ finalists, finalOffset, pickChoice, round }) => {
           Tournament Phase: <strong>Round {round}/3</strong>
         </Alert>
         <div className="tournament">
-          <div>
-            <Card>
-              <Card.Img
-                variant="top"
-                src={business1.image_url}
-                alt="Card image"
-                style={{
-                  height: '400px',
-                  objectFit: 'cover',
+          <Card style={{ width: '100%' }}>
+            <Card.Img
+              variant="top"
+              src={business1.image_url}
+              alt="Card image"
+              style={{
+                height: '300px',
+                objectFit: 'cover',
+              }}
+            />
+            <Card.Body>
+              <Card.Title>{business1.name}</Card.Title>
+              <Card.Subtitle>
+                {`${business1.rating}★ · ${business1.price} · ${(business1.distance / 1609).toFixed(1) + 'mi'}`}
+              </Card.Subtitle>
+              <Card.Text>
+                {categories1.join(', ')}
+              </Card.Text>
+              <Card.Text>
+                {`${business1.review_count} reviews`}
+              </Card.Text>
+              <Button
+                variant="outline-primary"
+                onClick={() => {
+                  pickChoice(finalOffset + 1);
                 }}
-              />
-              <Card.Body>
-                <Card.Title>{business1.name}</Card.Title>
-                <Card.Subtitle>
-                  {`${business1.rating}★ · ${business1.price} · ${(business1.distance / 1609).toFixed(1) + 'mi'}`}
-                </Card.Subtitle>
-                <Card.Text>
-                  {categories1.join(', ')}
-                </Card.Text>
-                <Card.Text>
-                  {`${business1.review_count} reviews`}
-                </Card.Text>
-                <Button
-                  variant="outline-primary"
-                  onClick={() => {
-                    pickChoice(finalOffset + 1);
-                  }}
-                >
-                  SELECT
-                </Button>
-              </Card.Body>
-            </Card>
-          </div>
-          <div>
-            <Card>
-              <Card.Img
-                variant="top"
-                src={business2.image_url}
-                alt="Card image"
-                style={{
-                  height: '400px',
-                  objectFit: 'cover',
+              >
+                SELECT
+              </Button>
+            </Card.Body>
+          </Card>
+          <Card style={{ width: '100%' }}>
+            <Card.Img
+              variant="top"
+              src={business2.image_url}
+              alt="Card image"
+              style={{
+                height: '300px',
+                objectFit: 'cover',
+              }}
+            />
+            <Card.Body>
+              <Card.Title>{business2.name}</Card.Title>
+              <Card.Subtitle>
+                {`${business2.rating}★ · ${business2.price} · ${(business2.distance / 1609).toFixed(1) + 'mi'}`}
+              </Card.Subtitle>
+              <Card.Text>
+                {categories2.join(', ')}
+              </Card.Text>
+              <Card.Text>
+                {`${business2.review_count} reviews`}
+              </Card.Text>
+              <Button
+                variant="outline-primary"
+                onClick={() => {
+                  pickChoice(finalOffset);
                 }}
-              />
-              <Card.Body>
-                <Card.Title>{business2.name}</Card.Title>
-                <Card.Subtitle>
-                  {`${business2.rating}★ · ${business2.price} · ${(business2.distance / 1609).toFixed(1) + 'mi'}`}
-                </Card.Subtitle>
-                <Card.Text>
-                  {categories2.join(', ')}
-                </Card.Text>
-                <Card.Text>
-                  {`${business2.review_count} reviews`}
-                </Card.Text>
-                <Button
-                  variant="outline-primary"
-                  onClick={() => {
-                    pickChoice(finalOffset);
-                  }}
-                >
-                  SELECT
-                </Button>
-              </Card.Body>
-            </Card>
-          </div>
+              >
+                SELECT
+              </Button>
+            </Card.Body>
+          </Card>
         </div>
       </div>
     )

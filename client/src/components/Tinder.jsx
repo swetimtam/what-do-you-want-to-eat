@@ -27,7 +27,7 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
               src={business.image_url}
               alt="Card image"
               style={{
-                height: '400px',
+                height: '300px',
                 objectFit: 'cover',
               }}
             />
