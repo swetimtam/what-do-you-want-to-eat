@@ -216,9 +216,9 @@ class App extends React.Component {
       return (
         <div>
           <Alert variant="success">
-            <strong>WINNER WINNER THIS IS YOUR DINNER</strong>
+            <strong>WINNER WINNER</strong>
           </Alert>
-          <Card style={{ width: '400px' }}>
+          <Card style={{ width: '300px' }}>
             <Card.Img
               variant="top"
               src={business.image_url}
@@ -240,7 +240,7 @@ class App extends React.Component {
                 <br />
                 {business.phone}
                 <br />
-                {`${business.review_count} reviews`}
+                <a href={business.url}>Open Yelp</a>
               </Card.Text>
             </Card.Body>
           </Card>

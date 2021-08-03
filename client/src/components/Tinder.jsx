@@ -21,7 +21,7 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
           Tinder Phase: Like <strong>{8 - finalists.length}</strong> more options
         </Alert>
         <div className="tinder-card">
-          <Card style={{ width: '400px' }}>
+          <Card style={{ width: '300px' }}>
             <Card.Img
               variant="top"
               src={business.image_url}
