@@ -9,12 +9,6 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
   const business = businesses[offset];
 
   if (business) {
-    const categories = [];
-
-    for (let i = 0; i < business.categories.length; i++) {
-      categories.push(business.categories[i].title);
-    }
-
     return (
       <div className="tinder">
         <Alert variant="info">
@@ -26,22 +20,16 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
               variant="top"
               src={business.image_url}
               alt="Card image"
-              style={{
-                height: '300px',
-                objectFit: 'cover',
-              }}
             />
             <Card.Body>
               <Card.Title>{business.name}</Card.Title>
               <Card.Subtitle>
-                {`${business.rating}★ · ${business.price} · ${(business.distance / 1609).toFixed(1) + 'mi'}`}
+                {`${business.categories.map((category) => category.title).join(' · ')} ${business.price ? ' · ' + business.price : ''}`}
               </Card.Subtitle>
               <Card.Text>
-                {business.categories.length && business.categories[0].title}
+                {`${business.rating}★ ${business.review_count} reviews ${(business.distance / 1609).toFixed(1) + 'mi'}`}
                 <br />
                 <a href={business.url} target="_blank">Yelp</a>
-                <br />
-                {`${business.review_count} reviews`}
               </Card.Text>
               <Button
                 variant="outline-danger"
@@ -65,7 +53,7 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
     )
   } else {
     return (
-      <Alert variant="danger">
+      <Alert variant="warning">
         Finding hot local restaurants near you...
       </Alert>
     )

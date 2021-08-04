@@ -207,39 +207,32 @@ class App extends React.Component {
 
     if (isComplete) {
       const business = finalists[finalOffset];
-      const categories = [];
-
-      for (let i = 0; i < business.categories.length; i++) {
-        categories.push(business.categories[i].title);
-      }
 
       return (
-        <div>
+        <div className="main">
           <Alert variant="success">
             <strong>WINNER WINNER</strong>
           </Alert>
-          <Card>
-            <Card.Img
-              variant="top"
-              src={business.image_url}
-              alt="Card image"
-              style={{
-                height: '300px',
-                objectFit: 'cover',
-              }}
-            />
-            <Card.Body>
-              <Card.Title>{business.name}</Card.Title>
-              <Card.Subtitle>
-                {`${business.rating}★ · ${business.price} · ${(business.distance / 1609).toFixed(1) + 'mi'}`}
+          <div className="main-card">
+            <Card>
+              <Card.Img
+                variant="top"
+                src={business.image_url}
+                alt="Card image"
+              />
+              <Card.Body>
+                <Card.Title>{business.name}</Card.Title>
+                <Card.Subtitle>
+                {`${business.categories.map((category) => category.title).join(' · ')} ${business.price ? ' · ' + business.price : ''}`}
               </Card.Subtitle>
               <Card.Text>
-                {business.categories.length && business.categories[0].title}
+                {`${business.rating}★ ${business.review_count} reviews ${(business.distance / 1609).toFixed(1) + 'mi'}`}
                 <br />
-                <a href={business.url} target="_blank">Checkout Yelp</a>
+                <a href={business.url} target="_blank">Yelp</a>
               </Card.Text>
-            </Card.Body>
-          </Card>
+              </Card.Body>
+            </Card>
+          </div>
         </div>
       )
     }
@@ -295,7 +288,7 @@ class App extends React.Component {
       )
     } else {
       return (
-        <Alert variant="warning">
+        <Alert variant="danger">
           Stalking your location...
         </Alert>
       )

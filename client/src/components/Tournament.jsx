@@ -10,17 +10,6 @@ const Tournament = ({ finalists, finalOffset, pickChoice, round }) => {
   const business2 = finalists[finalOffset + 1];
 
   if (business2) {
-    // const categories1 = [];
-    // const categories2 = [];
-
-    // for (let i = 0; i < business1.categories.length; i++) {
-    //   categories1.push(business1.categories[i].title);
-    // }
-
-    // for (let i = 0; i < business2.categories.length; i++) {
-    //   categories2.push(business2.categories[i].title);
-    // }
-
     return (
       <div className="tournament">
         <Alert variant="info">
@@ -32,22 +21,16 @@ const Tournament = ({ finalists, finalOffset, pickChoice, round }) => {
               variant="top"
               src={business1.image_url}
               alt="Card image"
-              style={{
-                height: '300px',
-                objectFit: 'cover',
-              }}
             />
             <Card.Body>
               <Card.Title>{business1.name}</Card.Title>
               <Card.Subtitle>
-                {`${business1.rating}★ · ${business1.price} · ${(business1.distance / 1609).toFixed(1) + 'mi'}`}
+                {`${business1.categories.map((category) => category.title).join(' · ')} ${business1.price ? ' · ' + business1.price : ''}`}
               </Card.Subtitle>
               <Card.Text>
-                {business1.categories.length && business1.categories[0].title}
+                {`${business1.rating}★ ${business1.review_count} reviews ${(business1.distance / 1609).toFixed(1) + 'mi'}`}
                 <br />
                 <a href={business1.url} target="_blank">Yelp</a>
-                <br />
-                {`${business1.review_count} reviews`}
               </Card.Text>
               <Button
                 variant="outline-primary"
@@ -59,27 +42,22 @@ const Tournament = ({ finalists, finalOffset, pickChoice, round }) => {
               </Button>
             </Card.Body>
           </Card>
+          <br />
           <Card style={{ width: '100%' }}>
             <Card.Img
               variant="top"
               src={business2.image_url}
               alt="Card image"
-              style={{
-                height: '300px',
-                objectFit: 'cover',
-              }}
             />
             <Card.Body>
               <Card.Title>{business2.name}</Card.Title>
               <Card.Subtitle>
-                {`${business2.rating}★ · ${business2.price} · ${(business2.distance / 1609).toFixed(1) + 'mi'}`}
+                {`${business2.categories.map((category) => category.title).join(' · ')} ${business2.price ? ' · ' + business2.price : ''}`}
               </Card.Subtitle>
               <Card.Text>
-                {business2.categories.length && business2.categories[0].title}
+                {`${business2.rating}★ ${business2.review_count} reviews ${(business2.distance / 1609).toFixed(1) + 'mi'}`}
                 <br />
                 <a href={business2.url} target="_blank">Yelp</a>
-                <br />
-                {`${business2.review_count} reviews`}
               </Card.Text>
               <Button
                 variant="outline-primary"

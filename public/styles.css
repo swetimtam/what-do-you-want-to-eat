@@ -8,18 +8,17 @@
   grid-template-columns: 1fr;
 }
 
-.tinder {
+.main,
+.tinder,
+.tournament {
   width: 100%;
 }
 
+.main-card,
 .tinder-card {
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
-}
-
-.tournament {
-  width: 100%;
 }
 
 .tournament-card {
@@ -36,6 +35,10 @@
   width: 100%;
 }
 
+.card-img-top {
+  height: 250px;
+  object-fit: cover;
+}
 /* .card {
   word-wrap: break-word;
   width: 300px;
@@ -50,18 +53,16 @@
   background-position: center;
 } */
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 599px) {
   #root {
     width: 100%;
   }
 
-  .card-img-top {
-    height: 250px !important;
+  .tournament-card {
+    grid-template-columns: 1fr;
   }
-}
 
-@media only screen and (max-width: 500px) {
   .card-img-top {
-    height: 200px !important;
+    height: 150px;
   }
 }
