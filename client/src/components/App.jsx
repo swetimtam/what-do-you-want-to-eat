@@ -218,7 +218,7 @@ class App extends React.Component {
           <Alert variant="success">
             <strong>WINNER WINNER</strong>
           </Alert>
-          <Card style={{ width: '300px' }}>
+          <Card>
             <Card.Img
               variant="top"
               src={business.image_url}
@@ -234,13 +234,9 @@ class App extends React.Component {
                 {`${business.rating}★ · ${business.price} · ${(business.distance / 1609).toFixed(1) + 'mi'}`}
               </Card.Subtitle>
               <Card.Text>
-                {categories.join(', ')}
+                {business.categories.length && business.categories[0].title}
                 <br />
-                {`${business.location.address1}, ${business.location.city}, ${business.location.state} ${business.location.zip_code}`}
-                <br />
-                {business.phone}
-                <br />
-                <a href={business.url}>Open Yelp</a>
+                <a href={business.url} target="_blank">Checkout Yelp</a>
               </Card.Text>
             </Card.Body>
           </Card>

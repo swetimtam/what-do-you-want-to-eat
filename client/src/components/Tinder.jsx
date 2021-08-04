@@ -21,7 +21,7 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
           Tinder Phase: Like <strong>{8 - finalists.length}</strong> more options
         </Alert>
         <div className="tinder-card">
-          <Card style={{ width: '300px' }}>
+          <Card>
             <Card.Img
               variant="top"
               src={business.image_url}
@@ -37,7 +37,9 @@ const Tinder = ({ businesses, offset, finalists, getNextRestaurant, addRestauran
                 {`${business.rating}★ · ${business.price} · ${(business.distance / 1609).toFixed(1) + 'mi'}`}
               </Card.Subtitle>
               <Card.Text>
-                {categories.join(', ')}
+                {business.categories.length && business.categories[0].title}
+                <br />
+                <a href={business.url} target="_blank">Yelp</a>
                 <br />
                 {`${business.review_count} reviews`}
               </Card.Text>

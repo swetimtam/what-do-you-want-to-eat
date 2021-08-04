@@ -28,6 +28,10 @@
   justify-items: center;
 }
 
+.card {
+  width: 300px;
+}
+
 .alert {
   width: 100%;
 }
