@@ -42,7 +42,6 @@ const Tournament = ({ finalists, finalOffset, pickChoice, round }) => {
               </Button>
             </Card.Body>
           </Card>
-          <br />
           <Card style={{ width: '100%' }}>
             <Card.Img
               variant="top"
