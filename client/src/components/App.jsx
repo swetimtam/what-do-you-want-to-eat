@@ -42,6 +42,7 @@ class App extends React.Component {
     this.addRestaurant = this.addRestaurant.bind(this);
     this.checkOffset = this.checkOffset.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.resetState = this.resetState.bind(this);
   }
 
   componentDidMount() {
@@ -202,6 +203,13 @@ class App extends React.Component {
     })
   }
 
+  resetState() {
+    console.log('reset');
+    this.setState({
+      offset: 0,
+    });
+  }
+
   render() {
     const { businesses, offset, finalists, finalOffset, tourniReady, isComplete, hasLocation, doneWaiting, location, round } = this.state;
 
@@ -230,6 +238,12 @@ class App extends React.Component {
                 <br />
                 <a href={business.url} target="_blank">Yelp</a>
               </Card.Text>
+              <Button
+                variant="outline-warning"
+                onClick={this.resetState}
+              >
+                Start Again
+              </Button>
               </Card.Body>
             </Card>
           </div>
