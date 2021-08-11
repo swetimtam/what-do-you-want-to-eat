@@ -38,7 +38,7 @@
 }
 
 .card-img-top {
-  height: 250px;
+  height: 300px;
   object-fit: cover;
 }
 
@@ -69,7 +69,7 @@
     height: 48vh;
   }
 
-  .card-img-top {
+  .tournament-card > .card > .card-img-top {
     height: 170px;
   }
 }
