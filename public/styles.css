@@ -1,5 +1,6 @@
 #root {
   display: grid;
+  height: 100vh;
   width: 600px;
   margin: auto;
   justify-self: center;
@@ -12,6 +13,7 @@
 .tinder,
 .tournament {
   width: 100%;
+  height: 100%;
 }
 
 .main-card,
@@ -19,6 +21,7 @@
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
+  height: 90%;
 }
 
 .tournament-card {
@@ -39,7 +42,7 @@
 }
 
 .card-img-top {
-  height: 400px;
+  height: 50%;
   object-fit: cover;
 }
 
@@ -68,10 +71,6 @@
 
   .tournament-card > .card {
     height: 45vh;
-  }
-
-  .tournament-card > .card > .card-img-top {
-    height: 170px;
   }
 
 }
